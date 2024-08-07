@@ -12,14 +12,23 @@ async function create(req, res) {
       if (req.body[key] === "") delete req.body[key]
     }
     const flight = await Flight.create(req.body)
-    res.redirect("/flights")    
+    res.redirect(`/flights`)    
   } catch (error) {
     console.log(error);
     res.redirect("/flights/new")
   }
 }
 
+async function index(req, res) {
+  const flights = await Flight.find({})
+res.render("flights/index", {
+  title: "All Flights",
+  flights
+})
+}
+
 export {
   newFlight as new,
-  create
+  create,
+  index,
 }
