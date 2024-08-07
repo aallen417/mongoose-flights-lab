@@ -6,6 +6,20 @@ function newFlight(req, res) {
   })
 }
 
+async function create(req, res) {
+  try {
+    for (let key in req.body) {
+      if (req.body[key] === "") delete req.body[key]
+    }
+    const flight = await Flight.create(req.body)
+    res.redirect("/flights")    
+  } catch (error) {
+    console.log(error);
+    res.redirect("/flights/new")
+  }
+}
+
 export {
-  newFlight as new
+  newFlight as new,
+  create
 }
