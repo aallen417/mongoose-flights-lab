@@ -1,5 +1,6 @@
 <%- include('../partials/html-head') %>
 <link rel="stylesheet" href="/stylesheets/flights/show.css" />
+<link rel="stylesheet" href="/stylesheets/flights/new.css" />
 <%- include('../partials/nav') %>
 
 <main>
@@ -15,6 +16,53 @@
     <div><%= flight.departs %></div>
   </section>
   <a href="/flights/<%= flight._id %>/edit"><button>Edit Flight</button></a>
+  <form action="/flights/<%= flight._id %>/tickets" method="POST" id="add-ticket-form"    
+>
+  <label for="seat-select">Seat</label>
+  <select name="seat" id="seat-select">
+    <option value="1A">1A</option>
+    <option value="1B">1B</option>
+    <option value="1C">1C</option>
+    <option value="2A">2A</option>
+    <option value="2B">2B</option>
+    <option value="2C">2C</option>
+    <option value="3A">3A</option>
+    <option value="3B">3B</option>
+    <option value="3C">3C</option>
+    <option value="4A">4A</option>
+    <option value="4B">4B</option>
+    <option value="4C">4C</option>
+    <option value="5A">5A</option>
+    <option value="5B">5B</option>
+    <option value="5C">5C</option>
+    <option value="6A">6A</option>
+    <option value="6B">6B</option>
+    <option value="6C">6C</option>      
+    <option value="1A" selected>1A</option>
+  </select>
+  <label for="price-select">Price</label>
+  <select name="price" id="price-select">
+    <option value="550">550</option>
+    <option value="850">850</option>
+    <option value="1750">1750</option>
+    <option value="550" selected>550</option>
+  </select>
+  <button type="submit">Buy Ticket</button>
+</form>
+  <% if (flight.tickets.length) { %>
+    <section>
+      <div>Date</div>
+      <div>Seat</div>
+    </section>
+    <% flight.tickets.forEach(function(ticket) { %>
+      <section>
+        <div><%= ticket.seat %></div>
+        <div><%= ticket.price %></div>
+      </section>
+    <% }) %>
+  <% } else { %>
+    <h3>There are no tickets</h3>
+  <% } %>
 </main>
   
 <%- include('../partials/footer') %>

@@ -18,6 +18,9 @@ router.get("/:flightId/edit", flightsCtrl.edit)
 // POST /movies
 router.post('/', flightsCtrl.create)
 
+// POST /movies/:movieId/review
+router.post("/:flightId/tickets", flightsCtrl.createTicket)
+
 //PUT /flights/:flightId
 router.put("/:flightId", flightsCtrl.update)
 
