@@ -12,8 +12,13 @@ router.get("/", flightsCtrl.index)
 // GET /flights/:flightId
 router.get("/:flightId", flightsCtrl.show)
 
+// GET /flights/:flightId/edit
+router.get("/:flightId/edit", flightsCtrl.edit)
+
 // POST /movies
 router.post('/', flightsCtrl.create)
 
+//PUT /flights/:flightId
+router.put("/:flightId", flightsCtrl.update)
 
 export { router }

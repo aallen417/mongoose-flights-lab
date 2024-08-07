@@ -40,9 +40,34 @@ async function show(req, res) {
   }
 }
 
+async function edit(req, res) {
+  try {
+    const flight = await Flight.findById(req.params.flightId)
+    res.render("flights/edit", {
+      title: "Edit Flight",
+      flight
+    })    
+  } catch (error) {
+    console.log(error)
+    res.redirect("/flights")    
+  }
+}
+
+async function update(req, res) {
+  try {
+    await Flight.findByIdAndUpdate(req.params.flightId, req.body, {new: true})
+    res.redirect(`/flights/${req.params.flightId}`)    
+  } catch (error) {
+    console.log(error)    
+    res.redirect(`/flights/${req.params.flightId}`)
+  }
+}
+
 export {
   newFlight as new,
   create,
   index,
   show,
+  edit,
+  update,
 }
