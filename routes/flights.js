@@ -9,6 +9,9 @@ router.get("/new", flightsCtrl.new)
 // GET /flights
 router.get("/", flightsCtrl.index)
 
+// GET /flights/:flightId
+router.get("/:flightId", flightsCtrl.show)
+
 // POST /movies
 router.post('/', flightsCtrl.create)
 
