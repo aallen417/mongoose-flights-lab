@@ -32,9 +32,7 @@ async function show(req, res) {
   try {
     const flight = await Flight.findById(req.params.flightId)
     .populate("meals")
-    const meals = await Meal.find({_id: {$nin: flight.meals}})
-    console.log(meals)
-    
+    const meals = await Meal.find({_id: {$nin: flight.meals}})    
     res.render("flights/show", {
       title: "Flight Details",
       flight,
@@ -81,6 +79,18 @@ async function createTicket(req, res) {
   }
 }
 
+async function addToMeals(req, res) {
+  try {
+    const flight = await Flight.findById(req.params.flightId)
+    flight.meals.push(req.body.mealId)
+    await flight.save()
+    res.redirect(`/flights/${flight._id}`)
+  } catch (error) {
+    console.log(error)
+    res.redirect("/")
+  }
+}
+
 export {
   newFlight as new,
   create,
@@ -88,5 +98,6 @@ export {
   show,
   edit,
   update,
-  createTicket
+  createTicket,
+  addToMeals
 }

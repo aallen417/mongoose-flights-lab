@@ -18,10 +18,14 @@ router.get("/:flightId/edit", flightsCtrl.edit)
 // POST /movies
 router.post('/', flightsCtrl.create)
 
-// POST /movies/:movieId/review
+// POST /flights/:flightId/review
 router.post("/:flightId/tickets", flightsCtrl.createTicket)
+
+//POST /flights/:flightId/meals
+router.post("/:flightId/meals", flightsCtrl.addToMeals)
 
 //PUT /flights/:flightId
 router.put("/:flightId", flightsCtrl.update)
+
 
 export { router }
