@@ -20,9 +20,9 @@ async function create(req, res) {
 }
 
 async function index(req, res) {
-  const flights = await Flight.find({})
+ const flights = await Flight.find({})
 res.render("flights/index", {
-  title: "All Flights",
+  title: "All Flights", 
   flights
 })
 }
