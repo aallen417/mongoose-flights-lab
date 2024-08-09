@@ -1,4 +1,5 @@
 import { Flight } from "../models/flight.js"
+import { Meal } from "../models/meal.js"
 
 function newFlight(req, res) {
   res.render("flights/new", {
@@ -15,7 +16,7 @@ async function create(req, res) {
     res.redirect(`/flights`)    
   } catch (error) {
     console.log(error)
-    res.redirect("/flights/new")
+    res.redirect(`/meals/${meal._id}`)
   }
 }
 
@@ -30,9 +31,14 @@ res.render("flights/index", {
 async function show(req, res) {
   try {
     const flight = await Flight.findById(req.params.flightId)
+    .populate("meals")
+    const meals = await Meal.find({_id: {$nin: flight.meals}})
+    console.log(meals)
+    
     res.render("flights/show", {
       title: "Flight Details",
-      flight
+      flight,
+      meals
     })
   } catch (error) {
     console.log(error)
